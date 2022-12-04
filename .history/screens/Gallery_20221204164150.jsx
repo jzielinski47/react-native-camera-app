@@ -5,10 +5,10 @@ import * as MediaLibrary from "expo-media-library";
 import { ToastAndroid } from "react-native";
 import FotoItem from '../components/FotoItem';
 
-const Gallery = ({ navigation }) => {
+export default function Gallery() {
 
     const [imageGallery, setImageGallery] = useState([])
-    const [layout, setLayout] = useState(4)
+    const [columns, setColumns] = useState(5)
 
     useEffect(() => { downloadAlbum() }, [])
     useEffect(() => console.log(imageGallery), [imageGallery])
@@ -21,19 +21,21 @@ const Gallery = ({ navigation }) => {
         setImageGallery([...photos.assets])
     }
 
-    const changeLayout = () => setLayout(layout === 4 ? 1 : 4)
+    const changeDisplay = () => 
+        setColumns(columns === 5 ? 1 : 5)
+    
 
     return (
         <View style={styles.container}>
             <View style={styles.headlineBtns}>
-                <CustomButtonEmp title={'layout'} onPress={changeLayout} />
-                <CustomButtonEmp title={'camera'} onPress={() => navigation} />
+                <CustomButtonEmp title={'layout'} onPress={() => console.log('layout')} />
+                <CustomButtonEmp title={'camera'} onPress={() => console.log('camera')} />
                 <CustomButtonEmp title={'delete'} onPress={() => console.log('delete')} />
             </View>
             <View style={styles.gallery}>
                 {/* <Text style={styles.text}>Display</Text> */}
-                <FlatList numColumns={layout} key={layout} data={imageGallery} renderItem={({ item }) => (
-                    <FotoItem id={item.id} timestamp={item.creationTime} uri={item.uri} layout={layout} />
+                <FlatList numColumns={5} key={5} data={imageGallery} renderItem={({ item }) => (
+                    <FotoItem id={item.id} timestamp={item.creationTime} uri={item.uri} />
                 )}
                 />
             </View>
@@ -50,5 +52,3 @@ const styles = StyleSheet.create({
     title: { color: 'white', fontWeight: 'bold', fontSize: 32, marginBottom: 5 },
     text: { color: 'white', fontSize: 16, marginBottom: 30 }
 });
-
-export default Gallery;

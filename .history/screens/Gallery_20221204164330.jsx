@@ -8,7 +8,7 @@ import FotoItem from '../components/FotoItem';
 const Gallery = ({ navigation }) => {
 
     const [imageGallery, setImageGallery] = useState([])
-    const [layout, setLayout] = useState(4)
+    const [columns, setColumns] = useState(5)
 
     useEffect(() => { downloadAlbum() }, [])
     useEffect(() => console.log(imageGallery), [imageGallery])
@@ -21,7 +21,7 @@ const Gallery = ({ navigation }) => {
         setImageGallery([...photos.assets])
     }
 
-    const changeLayout = () => setLayout(layout === 4 ? 1 : 4)
+    const changeLayout = () => setColumns(columns === 5 ? 1 : 5)
 
     return (
         <View style={styles.container}>
@@ -32,8 +32,8 @@ const Gallery = ({ navigation }) => {
             </View>
             <View style={styles.gallery}>
                 {/* <Text style={styles.text}>Display</Text> */}
-                <FlatList numColumns={layout} key={layout} data={imageGallery} renderItem={({ item }) => (
-                    <FotoItem id={item.id} timestamp={item.creationTime} uri={item.uri} layout={layout} />
+                <FlatList numColumns={columns} key={columns} data={imageGallery} renderItem={({ item }) => (
+                    <FotoItem id={item.id} timestamp={item.creationTime} uri={item.uri} />
                 )}
                 />
             </View>

@@ -5,10 +5,12 @@ import * as MediaLibrary from "expo-media-library";
 import { ToastAndroid } from "react-native";
 import FotoItem from '../components/FotoItem';
 
+const cols = 4
+
 const Gallery = ({ navigation }) => {
 
     const [imageGallery, setImageGallery] = useState([])
-    const [layout, setLayout] = useState(4)
+    const [layout, setLayout] = useState(cols)
 
     useEffect(() => { downloadAlbum() }, [])
     useEffect(() => console.log(imageGallery), [imageGallery])
@@ -21,7 +23,7 @@ const Gallery = ({ navigation }) => {
         setImageGallery([...photos.assets])
     }
 
-    const changeLayout = () => setLayout(layout === 4 ? 1 : 4)
+    const changeLayout = () => setLayout(layout === cols ? 1 : cols)
 
     return (
         <View style={styles.container}>

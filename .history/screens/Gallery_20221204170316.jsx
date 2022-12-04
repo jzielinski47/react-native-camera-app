@@ -21,7 +21,7 @@ const Gallery = ({ navigation }) => {
         setImageGallery([...photos.assets])
     }
 
-    const changeLayout = () => setLayout(layout === 4 ? 1 : 4)
+    const changeLayout = () => setLayout(layout === 5 ? 1 : 5)
 
     return (
         <View style={styles.container}>
