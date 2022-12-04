@@ -2,10 +2,10 @@ import React from 'react';
 import { StyleSheet, Text, View, StatusBar, ActivityIndicator, TouchableOpacity, Image } from 'react-native';
 
 
-const CameraButton = ({ title, onPress, uri }) => {
+const CameraButton = ({ title, onPress, uri, stylesheet }) => {
     return (
-        <TouchableOpacity onPress={onPress} style={styles.button}>
-            <Text style={styles.text}>{title}</Text>
+        <TouchableOpacity onPress={onPress} style={[styles.button, stylesheet]}>
+            <Image style={{ width: 32, height: 32 }} source={{ uri: uri }} />
         </TouchableOpacity>
     )
 }
@@ -13,13 +13,11 @@ const CameraButton = ({ title, onPress, uri }) => {
 const styles = StyleSheet.create({
     button: {
         alignItems: 'center',
-        justifyContent: 'center',
-        paddingVertical: 12,
-        paddingHorizontal: 32,
+        justifyContent: 'center',       
         borderRadius: 4,
-        // borderRadius: 30,
+        borderRadius: 250,
         elevation: 3,
-        backgroundColor: 'black',
+        backgroundColor: 'white',
     },
     text: {
         fontSize: 16,

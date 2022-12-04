@@ -2,7 +2,7 @@ import { StyleSheet, Text, View, StatusBar, ActivityIndicator, TouchableOpacity,
 import React, { useEffect, useState } from "react";
 import { Camera, CameraType } from "expo-camera";
 import * as MediaLibrary from "expo-media-library";
-import CustomButton from '../components/CustomButton';
+import CameraButton from '../components/CameraButton';
 
 const CameraScreen = ({ route, navigation }) => {
 
@@ -39,9 +39,9 @@ const CameraScreen = ({ route, navigation }) => {
         return (
             <View style={styles.container}>
                 <Camera style={styles.camera} type={type} ref={ref => setCamera(ref)}>
-                    <View style={{ flex: 1 }}>
-                        <CustomButton title={"rot"} onPress={() => toggleCamera()} />
-                        <CustomButton title={"shot"} onPress={() => takePhoto()} />
+                    <View style={{ position: 'absolute', top: 0, left: 0, right: 0, bottom: 0, justifyContent: 'flex-end', alignItems: 'center', padding: 15 }}>
+                        <CameraButton title={"rot"} onPress={() => toggleCamera()} uri='https://cdn.icon-icons.com/icons2/1875/PNG/512/rotateaxisy_120496.png' stylesheet={styles.rotateBtn} />
+                        <CameraButton title={"shot"} onPress={() => takePhoto()} uri='https://cdn.icon-icons.com/icons2/753/PNG/512/photo-camera-1_icon-icons.com_63898.png' stylesheet={styles.shotBtn} />
                     </View>
                 </Camera>
             </View>
@@ -58,6 +58,8 @@ const CameraScreen = ({ route, navigation }) => {
 const styles = StyleSheet.create({
     container: { flex: 1, backgroundColor: '#121212' },
     camera: { flex: 1 },
+    rotateBtn: { position: 'absolute', bottom: 15, left: 20, padding: 20 },
+    shotBtn: { padding: 35 },
     text: { color: 'white', fontSize: 16, marginBottom: 30, textAlign: 'center' }
 });
 

@@ -31,11 +31,13 @@ const Gallery = ({ navigation }) => {
         refresh();
     }
 
+    const initRef = () => refresh()
+
     return (
         <View style={styles.container}>
             <View style={styles.headlineBtns}>
                 <CustomButtonEmp title={'layout'} onPress={toggleLayout} />
-                <CustomButtonEmp title={'camera'} onPress={() => navigation.navigate('camera', { refresh: refresh })} />
+                <CustomButtonEmp title={'camera'} onPress={() => navigation.navigate('camera', { refresh: initRef })} />
                 <CustomButtonEmp title={'delete'} onPress={deleteSelectedPhotos} />
             </View>
             <View style={styles.gallery}>
