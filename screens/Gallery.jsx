@@ -12,32 +12,35 @@ const Gallery = ({ navigation }) => {
     const [deleteArr, setDeleteArr] = useState([])
     const [layout, setLayout] = useState(4)
 
-    useEffect(() => { downloadAlbum() }, [])
-    useEffect(() => setDeleteArr(selectedImages), [selectedImages])
+    useEffect(() => { refresh(); setSelectedImages([]); console.log('back') }, [])
+    useEffect(() => { setDeleteArr(selectedImages); }, [selectedImages])
+    useEffect(() => { refresh() }, [imageGallery])
 
-    const downloadAlbum = async () => {
-        const { status } = MediaLibrary.requestPermissionsAsync();
+    const refresh = async () => {
+        const { status } = await MediaLibrary.requestPermissionsAsync();
         // ToastAndroid.showWithGravity('komunikat', ToastAndroid.SHORT, ToastAndroid.CENTER);
         const album = await MediaLibrary.getAlbumAsync("DCIM");
         const photos = await MediaLibrary.getAssetsAsync({ album: album, sortBy: "creationTime", first: 48, mediaType: ["photo"], })
         setImageGallery([...photos.assets])
     }
 
-    const changeLayout = () => setLayout(layout === 4 ? 1 : 4)
+    const toggleLayout = () => setLayout(layout === 4 ? 1 : 4)
 
-    const deleteSelectedPhotos = async () => await MediaLibrary.deleteAssetsAsync(deleteArr);
-
+    const deleteSelectedPhotos = async () => {
+        deleteArr.length > 0 ? await MediaLibrary.deleteAssetsAsync(deleteArr) : alert('select at least one image')
+        refresh();
+    }
 
     return (
         <View style={styles.container}>
             <View style={styles.headlineBtns}>
-                <CustomButtonEmp title={'layout'} onPress={changeLayout} />
-                <CustomButtonEmp title={'camera'} onPress={() => navigation.navigate('camera')} />
+                <CustomButtonEmp title={'layout'} onPress={toggleLayout} />
+                <CustomButtonEmp title={'camera'} onPress={() => navigation.navigate('camera', { refresh: refresh })} />
                 <CustomButtonEmp title={'delete'} onPress={deleteSelectedPhotos} />
             </View>
             <View style={styles.gallery}>
                 <FlatList style={styles.list} numColumns={layout} key={layout} data={imageGallery} renderItem={({ item }) => (
-                    <FotoItem id={item.id} timestamp={item.creationTime} uri={item.uri} layout={layout} selectedImages={selectedImages} setSelectedImages={setSelectedImages} />
+                    <FotoItem id={item.id} timestamp={item.creationTime} uri={item.uri} layout={layout} selectedImages={selectedImages} setSelectedImages={setSelectedImages} navigation={navigation} imgs={imageGallery} refresh={refresh} />
                 )}
                 />
             </View>
