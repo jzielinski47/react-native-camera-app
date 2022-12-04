@@ -13,7 +13,7 @@ const Gallery = ({ navigation }) => {
     const [layout, setLayout] = useState(4)
 
     useEffect(() => { downloadAlbum() }, [])
-    useEffect(() => setDeleteArr(selectedImages), [selectedImages])
+    useEffect(() => console.log(imageGallery), [imageGallery])
 
     const downloadAlbum = async () => {
         const { status } = MediaLibrary.requestPermissionsAsync();
@@ -36,8 +36,9 @@ const Gallery = ({ navigation }) => {
                 <CustomButtonEmp title={'delete'} onPress={deleteSelectedPhotos} />
             </View>
             <View style={styles.gallery}>
+                {/* <Text style={styles.text}>Display</Text> */}
                 <FlatList style={styles.list} numColumns={layout} key={layout} data={imageGallery} renderItem={({ item }) => (
-                    <FotoItem id={item.id} timestamp={item.creationTime} uri={item.uri} layout={layout} selectedImages={selectedImages} setSelectedImages={setSelectedImages} />
+                    <FotoItem id={item.id} timestamp={item.creationTime} uri={item.uri} layout={layout} />
                 )}
                 />
             </View>

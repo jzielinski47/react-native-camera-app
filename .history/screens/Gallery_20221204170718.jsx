@@ -8,36 +8,32 @@ import FotoItem from '../components/FotoItem';
 const Gallery = ({ navigation }) => {
 
     const [imageGallery, setImageGallery] = useState([])
-    const [selectedImages, setSelectedImages] = useState([])
-    const [deleteArr, setDeleteArr] = useState([])
     const [layout, setLayout] = useState(4)
 
     useEffect(() => { downloadAlbum() }, [])
-    useEffect(() => setDeleteArr(selectedImages), [selectedImages])
+    useEffect(() => console.log(imageGallery), [imageGallery])
 
     const downloadAlbum = async () => {
         const { status } = MediaLibrary.requestPermissionsAsync();
         // ToastAndroid.showWithGravity('komunikat', ToastAndroid.SHORT, ToastAndroid.CENTER);
         const album = await MediaLibrary.getAlbumAsync("DCIM");
-        const photos = await MediaLibrary.getAssetsAsync({ album: album, sortBy: "creationTime", first: 48, mediaType: ["photo"], })
+        const photos = await MediaLibrary.getAssetsAsync({ album: album, sortBy: "creationTime", first: 50, mediaType: ["photo"], })
         setImageGallery([...photos.assets])
     }
 
     const changeLayout = () => setLayout(layout === 4 ? 1 : 4)
 
-    const deleteSelectedPhotos = async () => await MediaLibrary.deleteAssetsAsync(deleteArr);
-
-
     return (
         <View style={styles.container}>
             <View style={styles.headlineBtns}>
                 <CustomButtonEmp title={'layout'} onPress={changeLayout} />
-                <CustomButtonEmp title={'camera'} onPress={() => navigation.navigate('camera')} />
-                <CustomButtonEmp title={'delete'} onPress={deleteSelectedPhotos} />
+                <CustomButtonEmp title={'camera'} onPress={() => navigation} />
+                <CustomButtonEmp title={'delete'} onPress={() => console.log('delete')} />
             </View>
             <View style={styles.gallery}>
+                {/* <Text style={styles.text}>Display</Text> */}
                 <FlatList style={styles.list} numColumns={layout} key={layout} data={imageGallery} renderItem={({ item }) => (
-                    <FotoItem id={item.id} timestamp={item.creationTime} uri={item.uri} layout={layout} selectedImages={selectedImages} setSelectedImages={setSelectedImages} />
+                    <FotoItem id={item.id} timestamp={item.creationTime} uri={item.uri} layout={layout} />
                 )}
                 />
             </View>
@@ -53,7 +49,7 @@ const styles = StyleSheet.create({
     icon: { width: 50, height: 50, margin: 10 },
     title: { color: 'white', fontWeight: 'bold', fontSize: 32, marginBottom: 5 },
     text: { color: 'white', fontSize: 16, marginBottom: 30 },
-    list: { paddingTop: 10 }
+    list: { paddingTop: 15 }
 });
 
 export default Gallery;

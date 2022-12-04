@@ -4,7 +4,7 @@ import React, { useEffect } from 'react'
 const maxWidth = Dimensions.get("window").width;
 const maxHeight = Dimensions.get("window").height;
 
-const FotoItem = ({ id, timestamp, uri, layout, selectedImages, setSelectedImages }) => {
+const FotoItem = ({ id, timestamp, uri, layout }) => {
 
     return (
         <View style={styles.container}>

@@ -4,7 +4,7 @@ import React, { useEffect } from 'react'
 const maxWidth = Dimensions.get("window").width;
 const maxHeight = Dimensions.get("window").height;
 
-const FotoItem = ({ id, timestamp, uri, layout, selectedImages, setSelectedImages }) => {
+const FotoItem = ({ id, timestamp, uri, layout }) => {
 
     return (
         <View style={styles.container}>
@@ -12,6 +12,7 @@ const FotoItem = ({ id, timestamp, uri, layout, selectedImages, setSelectedImage
                 <Image style={layout === 4 ? styles.gridImage : styles.wideImage} source={{ uri: uri }} />
                 <Text style={styles.id}>{id}</Text>
             </TouchableOpacity>
+
         </View>
     )
 }

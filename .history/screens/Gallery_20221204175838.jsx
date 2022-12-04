@@ -9,11 +9,11 @@ const Gallery = ({ navigation }) => {
 
     const [imageGallery, setImageGallery] = useState([])
     const [selectedImages, setSelectedImages] = useState([])
-    const [deleteArr, setDeleteArr] = useState([])
+    const [imagesToDelete, setImagesToDelete] = useState([])
     const [layout, setLayout] = useState(4)
 
     useEffect(() => { downloadAlbum() }, [])
-    useEffect(() => setDeleteArr(selectedImages), [selectedImages])
+    useEffect(() => console.log(imageGallery), [imageGallery])
 
     const downloadAlbum = async () => {
         const { status } = MediaLibrary.requestPermissionsAsync();
@@ -25,19 +25,17 @@ const Gallery = ({ navigation }) => {
 
     const changeLayout = () => setLayout(layout === 4 ? 1 : 4)
 
-    const deleteSelectedPhotos = async () => await MediaLibrary.deleteAssetsAsync(deleteArr);
-
-
     return (
         <View style={styles.container}>
             <View style={styles.headlineBtns}>
                 <CustomButtonEmp title={'layout'} onPress={changeLayout} />
                 <CustomButtonEmp title={'camera'} onPress={() => navigation.navigate('camera')} />
-                <CustomButtonEmp title={'delete'} onPress={deleteSelectedPhotos} />
+                <CustomButtonEmp title={'delete'} onPress={() => console.log('delete')} />
             </View>
             <View style={styles.gallery}>
+                {/* <Text style={styles.text}>Display</Text> */}
                 <FlatList style={styles.list} numColumns={layout} key={layout} data={imageGallery} renderItem={({ item }) => (
-                    <FotoItem id={item.id} timestamp={item.creationTime} uri={item.uri} layout={layout} selectedImages={selectedImages} setSelectedImages={setSelectedImages} />
+                    <FotoItem id={item.id} timestamp={item.creationTime} uri={item.uri} layout={layout} />
                 )}
                 />
             </View>

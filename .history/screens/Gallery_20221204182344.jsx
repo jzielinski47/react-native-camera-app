@@ -13,7 +13,7 @@ const Gallery = ({ navigation }) => {
     const [layout, setLayout] = useState(4)
 
     useEffect(() => { downloadAlbum() }, [])
-    useEffect(() => setDeleteArr(selectedImages), [selectedImages])
+    useEffect(() => console.log(imageGallery), [imageGallery])
 
     const downloadAlbum = async () => {
         const { status } = MediaLibrary.requestPermissionsAsync();

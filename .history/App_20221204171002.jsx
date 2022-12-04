@@ -5,7 +5,6 @@ import { StyleSheet, Text, View, StatusBar } from 'react-native';
 
 import Main from './screens/Main';
 import Gallery from './screens/Gallery';
-import CameraScreen from './screens/CameraScreen';
 
 const Stack = createNativeStackNavigator();
 
