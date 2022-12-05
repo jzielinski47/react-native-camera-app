@@ -13,11 +13,12 @@ const CameraButton = ({ title, onPress, uri, stylesheet }) => {
 const styles = StyleSheet.create({
     button: {
         alignItems: 'center',
-        justifyContent: 'center',       
+        justifyContent: 'center',
         borderRadius: 4,
         borderRadius: 250,
         elevation: 3,
         backgroundColor: 'white',
+        marginHorizontal: 20,
     },
     text: {
         fontSize: 16,

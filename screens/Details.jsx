@@ -36,9 +36,9 @@ const Details = ({ route, navigation }) => {
 }
 
 const styles = StyleSheet.create({
-    container: { flex: 1, jusifyContent: 'center', alignItems: 'center', backgroundColor: '#121212', padding: 15 },
-    image: { width: "100%", aspectRatio: 9 / 16, borderRadius: 10 },
-    buttons: { flexDirection: 'row', justifyContent: 'space-evenly', margin: 20, padding: 5, width: maxWidth }
+    container: { flex: 1, jusifyContent: 'center', alignItems: 'center', backgroundColor: '#121212', padding: 5 },
+    image: { height: "85%", width: '100%', borderRadius: 10 },
+    buttons: { flexDirection: 'row', justifyContent: 'space-evenly', margin: 5, padding: 5, width: maxWidth }
 });
 
 export default Details
